@@ -5,8 +5,7 @@ class LinkedStackTests(unittest.TestCase):
     # Make new lists and stacks for every test case to avoid potential mutation problems
 
     def test_misc(self):
-        # Put all the stuff you need for code coverage here
-        pass
+        self.assertEqual(repr(Stack(None)), "Stack(None)")
 
     def test_empty_stack(self):
         self.assertEqual(empty_stack(), Stack(None))
