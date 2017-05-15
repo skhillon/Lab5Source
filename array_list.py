@@ -20,26 +20,39 @@ class List:
 def empty_list():
     return List()
 
-# ArrayList, int, Any -> ArrayList
-# Inserts a value into ArrayList at given index
-def add(any_list, index, value):
-    if index < 0 or index > any_list.length:
+# AnyList, Any -> AnyList
+# Mutates the input AnyList by adding an element to the end of its array
+def append(any_list, new_val):
+    check_array_size(any_list)
+    any_list.array[array.length] = new_val
+    any_list.array += 1
+    return any_list
+
+# AnyList -> None
+# Mutates input AnyList by re-assigning array property to more None values
+def check_array_size(any_list):
+    if len(any_list.array) == any_list.length:
+        new_array = [None] * any_list.length * 2
+
+        for i in range(any_list.length):
+            new_array[i] = any_list.array[i]
+        any_list.array = new_array
+
+# AnyList, int, Any -> AnyList
+# Inserts an element into the specified index
+def add(any_list, index, new_val):
+    if index < 0 or index > any_list.length: 
         raise IndexError
 
-    new_list = List()
-    new_list.length = any_list.length + 1
-    new_list.capacity = index * 2
-    new_list.array = [None] * index * 2
+    check_array_size(any_list)
+    any_list.length += 1
 
-    for i in range(index):
-        new_list.array[i] = any_list.array[i]
+    for i in range(any_list.length, index, -1):
+        # start from the end and work your way down to above index
+        any_list.array[i] = any_list.array[i-1]
 
-    new_list.array[index] = value
-
-    for j in range(index, any_list.length):
-        new_list.array[j + 1] = any_list.array[j]
-
-    return new_list
+    any_list.array[index] = new_val
+    return any_list
 
 # AnyList -> int
 # Returns length of array
@@ -68,16 +81,10 @@ def set(any_list, index, value):
 def remove(any_list, index):
     if index >= any_list.length or index < 0:
         raise IndexError
-    
-    new_list = List()
-    new_list.length = any_list.length - 1
-
-    for i in range(index):
-        new_list.array[i] = any_list.array[i]
 
     removed = any_list.array[index]
 
-    for j in range(index + 1, any_list.length):
-        new_list.array[j - 1] = any_list.array[j]
+    for i in range(index, any_list.length):
+        any_list.array[i] = any_list.array[i + 1]
 
     return removed, new_list
