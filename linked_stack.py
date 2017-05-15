@@ -29,7 +29,7 @@ def pop(stack):
     if is_empty(stack):
         raise IndexError
     else:
-        return (stack.any_list.value, stack.any_list.rest)
+        return (stack.any_list.value, Stack(stack.any_list.rest))
 
 # Stack -> Any
 # Returns the top element of the stack; if there is no such element, raises IndexError
