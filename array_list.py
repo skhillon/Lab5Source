@@ -38,7 +38,7 @@ def check_array_size(any_list):
             new_array[i] = any_list.array[i]
         any_list.array = new_array
 
-# AnyList, int, Any -> AnyList
+# AnyList, int, Any -> None
 # Inserts an element into the specified index
 def add(any_list, index, new_val):
     if index < 0 or index > any_list.length: 
@@ -84,7 +84,16 @@ def remove(any_list, index):
 
     removed = any_list.array[index]
 
-    for i in range(index, any_list.length):
-        any_list.array[i] = any_list.array[i + 1]
+    new_arr = any_list.array
 
-    return removed, new_list
+    for i in range(index + 1, any_list.length - 1):
+        any_list.array[i - 1] = new_arr[i]
+
+    any_list.length -= 1
+    return removed, any_list
+
+my_list = List()
+my_list.array = [4, 3, 2, 1]
+my_list.length = 4
+
+print(remove(my_list, 0))

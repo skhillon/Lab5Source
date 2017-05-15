@@ -42,10 +42,7 @@ def peek(stack):
 # Stack -> int
 # Returns number of elements in the stack
 def size(stack):
-    if is_empty(stack):
-        return 0
-    else:
-        return length(stack.any_list)
+    return length(stack.any_list)
 
 # Stack -> Bool
 # Checks if Stack is empty

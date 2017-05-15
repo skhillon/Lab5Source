@@ -1,4 +1,4 @@
-from array_list import List
+from array_list import *
 
 # A Stack is Stack(List)
 class Stack:
@@ -18,28 +18,35 @@ class Stack:
 def empty_stack():
     return Stack(List())
 
-# Stack, Any -> Stack
+# Stack, Any -> None
 # Adds a new value to the stack
 def push(stack, new_val):
-    pass
+    add(stack.any_list, 0, new_val)
+    return
 
 # Stack -> (Any, Stack)
 # Returns the removed element and the resulting Stack; if there is no such element, raises IndexError
 def pop(stack):
-    pass
+    if is_empty(stack):
+        raise IndexError
+    else:
+        removed, popped_list = remove(stack.any_list, 0)
+        return (removed, Stack(popped_list))
 
 # Stack -> Any
 # Returns the top element of the stack; if there is no such element, raises IndexError
 def peek(stack):
-    pass
+    if is_empty(stack):
+        raise IndexError
+    else:
+        return stack.any_list.array[0]
 
 # Stack -> int
 # Returns number of elements in the stack
 def size(stack):
-    pass
+    return length(stack.any_list)
 
 # Stack -> Bool
 # Checks if Stack is empty
 def is_empty(stack):
-    pass
-
+    return stack.any_list.length == 0
